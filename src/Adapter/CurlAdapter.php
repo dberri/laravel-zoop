@@ -44,6 +44,10 @@ class CurlAdapter implements AdapterInterface
             'Accept'       => 'application/json',
         ];
 
+        if ($method === 'GET' && !empty($data)) {
+            $url .= '?' . http_build_query($data);
+        }
+
         $opts[CURLOPT_CONNECTTIMEOUT] = 30;
         $opts[CURLOPT_HTTPHEADER]     = $headers;
         $opts[CURLOPT_RETURNTRANSFER] = true;
