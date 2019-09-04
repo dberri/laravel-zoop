@@ -2,6 +2,8 @@
 
 namespace DBerri\LaravelZoop\Entity;
 
+use DBerri\LaravelZoop\Entity\AbstractEntity;
+
 class Address extends AbstractEntity
 {
     /**
@@ -9,38 +11,52 @@ class Address extends AbstractEntity
      *
      * @var string
      */
-    public $linha1;
+    public $line1;
 
     /**
      * O número da rua permite que você identifique cada edifício em uma rua.
      *
      * @var string
      */
-    public $linha2;
+    public $line2;
 
     /**
      * Número do apartamento e outras informações.
      *
      * @var string
      */
-    public $linha3;
+    public $line3;
 
     /**
      * @var string
      */
-    public $cidade;
+    public $city;
 
     /**
      * Código ISO 3166-2 para o estado da pessoa
      *
      * @var string
      */
-    public $estado;
+    public $state;
+
+    /**
+     * Bairro
+     *
+     * @var string
+     */
+    public $neighborhood;
 
     /**
      * Código postal da pessoa
      *
      * @var string
      */
-    public $codigo_postal;
+    public $postal_code;
+
+    /**
+     * Código do país (BR)
+     *
+     * @var string
+     */
+    public $country_code;
 }

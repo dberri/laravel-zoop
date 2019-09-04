@@ -2,7 +2,7 @@
 
 namespace DBerri\LaravelZoop\Entity;
 
-class AbsctractEntity
+class AbstractEntity
 {
     /**
      * @param \stdClass|array|null  $parameters (optional)  Entity parameters
@@ -38,6 +38,14 @@ class AbsctractEntity
     }
 
     /**
+     * Converte entidade para um array
+     */
+    public function toArray()
+    {
+        return get_object_vars($this);
+    }
+
+    /**
      * Converte string para camelCase
      *
      * @param  string  $str  snake_case string
@@ -47,7 +55,8 @@ class AbsctractEntity
     {
         $callback = function ($match) {
             return strtoupper($match[2]);
-        }
+        };
+
         return lcfirst(preg_replace_callback('/(^|_)([a-z])/', $callback, $str));
     }
 }

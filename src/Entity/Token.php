@@ -2,6 +2,8 @@
 
 namespace DBerri\LaravelZoop\Entity;
 
+use DBerri\LaravelZoop\Entity\AbstractEntity;
+
 class Token extends AbstractEntity
 {
     /**
