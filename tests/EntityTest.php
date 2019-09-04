@@ -2,6 +2,7 @@
 
 namespace DBerri\LaravelZoop\Tests;
 
+use DBerri\LaravelZoop\Entity\AbstractEntity;
 use DBerri\LaravelZoop\Entity\Seller;
 use Tests\TestCase;
 
@@ -18,6 +19,18 @@ class EntityTest extends TestCase
 
         $this->assertInstanceOf(Seller::class, $entity);
         $this->assertEquals('João', $entity->first_name);
+    }
+
+    public function testSubclassEntity()
+    {
+        $dados = [
+            'first_name' => 'João',
+            'last_name'  => 'da Silva',
+        ];
+
+        $entity = new Seller($dados);
+
+        $this->assertTrue(is_subclass_of($entity, AbstractEntity::class));
     }
 
     public function testTransformsToArray()
