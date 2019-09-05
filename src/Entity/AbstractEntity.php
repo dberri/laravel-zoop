@@ -28,11 +28,11 @@ class AbstractEntity
     public function build(array $parameters)
     {
         foreach ($parameters as $property => $value) {
-            $this->$property = $value;
-
             $mutator = 'set' . ucFirst(static::convertToCamelCase($property));
             if (method_exists($this, $mutator)) {
                 call_user_func_array([$this, $mutator], [$value]);
+            } else {
+                $this->$property = $value;
             }
         }
     }
