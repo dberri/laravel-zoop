@@ -4,7 +4,7 @@ namespace DBerri\LaravelZoop\Entity;
 
 use DBerri\LaravelZoop\Entity\AbstractEntity;
 
-class ContaBancaria extends AbstractEntity
+class BankAccount extends AbstractEntity
 {
     /**
      * Nome do portador
