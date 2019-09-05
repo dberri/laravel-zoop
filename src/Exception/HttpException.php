@@ -2,7 +2,7 @@
 
 namespace DBerri\LaravelZoop\Exception;
 
-class HttpException extends Exception
+class HttpException extends \Exception
 {
     /**
      * HTTP Status Code
@@ -22,15 +22,5 @@ class HttpException extends Exception
     {
         $this->code    = $code;
         $this->message = $body;
-    }
-
-    public function getMessage()
-    {
-        return $this->message;
-    }
-
-    public function getCode()
-    {
-        return $this->code;
     }
 }
