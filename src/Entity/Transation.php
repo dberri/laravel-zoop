@@ -3,6 +3,7 @@
 namespace DBerri\LaravelZoop\Entity;
 
 use DBerri\LaravelZoop\Entity\AbstractEntity;
+use DBerri\LaravelZoop\Entity\PaymentMethod;
 use DBerri\LaravelZoop\Entity\Source;
 
 class Transaction extends AbstractEntity
@@ -58,7 +59,7 @@ class Transaction extends AbstractEntity
     public $reference_id;
 
     /**
-     * @var DBerri\LaravelZoop\Entity\AbstractEntity
+     * @var DBerri\LaravelZoop\Entity\PaymentMethod
      */
     public $payment_method;
 
@@ -98,7 +99,7 @@ class Transaction extends AbstractEntity
      */
     public function setPaymentMethod($method)
     {
-        $this->payment_method = new AbstractEntity($method);
+        $this->payment_method = new PaymentMethod($method);
     }
 
     /**
