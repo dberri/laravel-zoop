@@ -45,4 +45,22 @@ class EntityTest extends TestCase
         $this->assertIsArray($entityArray);
         $this->assertArrayHasKey('first_name', $entityArray);
     }
+
+    public function testMakeCollectionFunction()
+    {
+        $dados = [
+            [
+                'first_name' => 'João',
+                'last_name'  => 'da Silva',
+            ],
+            [
+                'first_name' => 'Maria',
+                'last_name'  => 'de Souza',
+            ],
+        ];
+
+        $collection = Seller::makeCollection($dados);
+        $this->assertIsArray($collection);
+        $this->assertTrue(is_subclass_of($collection[0], AbstractEntity::class));
+    }
 }
