@@ -3,7 +3,9 @@
 namespace DBerri\LaravelZoop\API;
 
 use DBerri\LaravelZoop\API\AbstractApi;
+use DBerri\LaravelZoop\Entity\BankAccount;
 use DBerri\LaravelZoop\Entity\Seller;
+use DBerri\LaravelZoop\Entity\Transaction;
 
 class SellerApi extends AbstractApi
 {
@@ -145,6 +147,18 @@ class SellerApi extends AbstractApi
     {
         $url      = sprintf('/sellers/%s/transactions', $id);
         $response = $this->adapter->get($url, $params);
-        return $response['body'];
+        return Transaction::makeCollection($response['body']['items']);
+    }
+
+    /**
+     * Lista as contas bancarias do vendedor
+     *
+     * @param string $id
+     */
+    public function getTransactions($id, $params = [])
+    {
+        $url      = sprintf('/sellers/%s/bank_accounts', $id);
+        $response = $this->adapter->get($url, $params);
+        return BankAccount::makeCollection($response['body']['items']);
     }
 }
