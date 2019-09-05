@@ -2,15 +2,35 @@
 
 namespace DBerri\LaravelZoop\Exception;
 
-class HttpException
+class HttpException extends Exception
 {
-    public $code;
+    /**
+     * HTTP Status Code
+     *
+     * @var number
+     */
+    protected $code;
 
-    public $message;
+    /**
+     * Error message
+     *
+     * @var string
+     */
+    protected $message;
 
     public function __construct($code, $body)
     {
         $this->code    = $code;
         $this->message = $body;
+    }
+
+    public function getMessage()
+    {
+        return $this->message;
+    }
+
+    public function getCode()
+    {
+        return $this->code;
     }
 }

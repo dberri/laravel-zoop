@@ -3,7 +3,7 @@
 namespace DBerri\LaravelZoop\Adapter;
 
 use DBerri\LaravelZoop\Adapter\AdapterInterface;
-use DBerri\LaravelZoop\Exceptions\HttpException;
+use DBerri\LaravelZoop\Exception\HttpException;
 
 class CurlAdapter implements AdapterInterface
 {
@@ -75,7 +75,7 @@ class CurlAdapter implements AdapterInterface
         curl_close($curl);
 
         if ($response_code >= 300) {
-            throw HttpException($response_code, $response_body);
+            throw new HttpException($response_code, $response_body);
         }
 
         return ['body' => json_decode($response_body, true), 'statusCode' => $response_code];
