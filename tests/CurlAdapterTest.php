@@ -3,10 +3,19 @@
 namespace DBerri\LaravelZoop\Tests;
 
 use DBerri\LaravelZoop\Adapter\CurlAdapter;
+use DBerri\LaravelZoop\Exception\HttpException;
 use Tests\TestCase;
 
 class CurlAdapterTest extends TestCase
 {
+    public function testNotFoundException()
+    {
+        $this->expectException(HttpException::class);
+
+        $adapter  = new CurlAdapter();
+        $response = $adapter->get('/posts/999');
+    }
+
     /**
      * Test if the get request works.
      *
