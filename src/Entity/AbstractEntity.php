@@ -68,4 +68,9 @@ class AbstractEntity
             return $obj;
         }, $array);
     }
+
+    public function validate()
+    {
+        // valida os campos obrigatorios se não estão nulos
+    }
 }
