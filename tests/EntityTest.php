@@ -3,6 +3,8 @@
 namespace DBerri\LaravelZoop\Tests;
 
 use DBerri\LaravelZoop\Entity\AbstractEntity;
+use DBerri\LaravelZoop\Entity\Address;
+use DBerri\LaravelZoop\Entity\Buyer;
 use DBerri\LaravelZoop\Entity\Seller;
 use Tests\TestCase;
 
@@ -96,5 +98,83 @@ class EntityTest extends TestCase
         $collection = Seller::makeCollection($dados);
         $this->assertIsArray($collection);
         $this->assertTrue(is_subclass_of($collection[0], AbstractEntity::class));
+    }
+
+    public function testCanGetRequiredFields()
+    {
+        $dados = [
+            'line1'        => 'Rua Teste',
+            'line2'        => '123',
+            'neighborhood' => 'Bairro Teste',
+            'cidade'       => 'Test City',
+            'estado'       => 'SC',
+            'postal_code'  => '88123321',
+            'country_code' => 'BR',
+        ];
+
+        $entity     = new Address($dados);
+        $properties = $entity->getRequiredProperties();
+
+        $this->assertIsArray($properties);
+        $this->assertContains('line1', $properties);
+    }
+
+    public function testValidatesWithSuccess()
+    {
+        $dados = [
+            'line1'        => 'Rua Teste',
+            'line2'        => '123',
+            'neighborhood' => 'Bairro Teste',
+            'city'         => 'Test City',
+            'state'        => 'SC',
+            'postal_code'  => '88123321',
+            'country_code' => 'BR',
+        ];
+        $address = new Address($dados);
+
+        $this->assertTrue($address->validate());
+    }
+
+    public function testValidatesWithFailure()
+    {
+        $dados = [
+            'line1'        => 'Rua Teste',
+            'line2'        => '123',
+            'neighborhood' => 'Bairro Teste',
+            'city'         => 'Test City',
+            'state'        => 'SC',
+            'postal_code'  => '88123321',
+        ];
+        $address = new Address($dados);
+
+        $this->assertContains('country_code', $address->makeValidation());
+        $this->assertFalse($address->validate());
+    }
+
+    public function testValidatesNestedObject()
+    {
+        $dados = [
+            'first_name'  => 'João',
+            'taxpayer_id' => '123',
+            'address'     => [
+                'line1' => 'Rua Teste',
+                'line2' => '123',
+                'city'  => 'Brusque',
+                'state' => 'SC',
+            ],
+        ];
+
+        $entity = new Buyer($dados);
+
+        $this->assertFalse($entity->validate());
+
+        $testArray = [
+            'email',
+            'neighborhood',
+            'postal_code',
+            'country_code',
+        ];
+
+        $this->assertEmpty(array_diff($entity->makeValidation(), $testArray));
     }
 }

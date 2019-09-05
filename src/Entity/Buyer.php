@@ -7,6 +7,13 @@ use DBerri\LaravelZoop\Entity\Address;
 
 class Buyer extends AbstractEntity
 {
+    protected $required_properties = [
+        'first_name',
+        'email',
+        'taxpayer_id',
+        'address',
+    ];
+
     /**
      * @var string
      */

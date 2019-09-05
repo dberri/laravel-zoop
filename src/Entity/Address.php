@@ -6,6 +6,16 @@ use DBerri\LaravelZoop\Entity\AbstractEntity;
 
 class Address extends AbstractEntity
 {
+    protected $required_properties = [
+        'line1',
+        'line2',
+        'neighborhood',
+        'city',
+        'state',
+        'postal_code',
+        'country_code',
+    ];
+
     /**
      * Endereço da pessoa.
      *

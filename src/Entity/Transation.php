@@ -8,6 +8,14 @@ use DBerri\LaravelZoop\Entity\Source;
 
 class Transaction extends AbstractEntity
 {
+    protected $required_properties = [
+        'amount',
+        'currency',
+        'description',
+        'payment_type',
+        'on_behalf_of',
+    ];
+
     /**
      * Valor em centavos a ser cobrado pela transação
      *
@@ -20,7 +28,7 @@ class Transaction extends AbstractEntity
      *
      * @var string
      */
-    public $currency;
+    public $currency = 'BRL';
 
     /**
      *

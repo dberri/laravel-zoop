@@ -69,8 +69,48 @@ class AbstractEntity
         }, $array);
     }
 
+    public function getRequiredProperties()
+    {
+        return $this->required_properties;
+    }
+
+    private function isValid($property)
+    {
+        return !is_null($this->$property);
+    }
+
+    public function makeValidation()
+    {
+        $props  = $this->getRequiredProperties();
+        $errors = [];
+        foreach ($props as $field) {
+            $orTest = explode('|', $field);
+
+            if (count($orTest) > 1) {
+                if (!($this->isValid($orTest[0]) || $this->isValid($orTest[1]))) {
+                    $errors[] = $field;
+                }
+                continue;
+            }
+
+            if (is_subclass_of($this->$field, self::class)) {
+                $nestedErrors = ($this->$field)->makeValidation();
+                foreach ($nestedErrors as $value) {
+                    $errors[] = $value;
+                }
+            }
+
+            if (!$this->isValid($field)) {
+                $errors[] = $field;
+            }
+        }
+
+        return $errors;
+    }
+
     public function validate()
     {
-        // valida os campos obrigatorios se não estão nulos
+        $errors = $this->makeValidation();
+        return count($errors) === 0;
     }
 }

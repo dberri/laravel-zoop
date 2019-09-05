@@ -6,6 +6,10 @@ use DBerri\LaravelZoop\Entity\AbstractEntity;
 
 class SplitTransaction extends AbstractEntity
 {
+    protected $required_properties = [
+        'amount',
+    ];
+
     /**
      * id do vendedor recebedor
      *
@@ -19,7 +23,7 @@ class SplitTransaction extends AbstractEntity
      *
      * @var boolean
      */
-    public $liable;
+    public $liable = 1;
 
     /**
      * Define se vai ser feito split em cima do valor
