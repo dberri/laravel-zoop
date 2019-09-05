@@ -59,4 +59,13 @@ class AbstractEntity
 
         return lcfirst(preg_replace_callback('/(^|_)([a-z])/', $callback, $str));
     }
+
+    public static function makeCollection($array)
+    {
+        return array_map(function ($data) {
+            $obj = new static();
+            $obj->build($data);
+            return $obj;
+        }, $array);
+    }
 }
