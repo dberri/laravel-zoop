@@ -25,7 +25,7 @@ class AbstractEntity
      *
      * @param array  $parameters  Entity parameters
      */
-    public function build(array $parameters)
+    protected function build(array $parameters)
     {
         foreach ($parameters as $property => $value) {
             $mutator = 'set' . ucFirst(static::convertToCamelCase($property));
@@ -42,7 +42,7 @@ class AbstractEntity
      */
     public function toArray()
     {
-        return get_object_vars($this);
+        return json_decode(json_encode($this), true);
     }
 
     /**

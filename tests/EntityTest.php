@@ -33,6 +33,22 @@ class EntityTest extends TestCase
         $this->assertTrue(is_subclass_of($entity, AbstractEntity::class));
     }
 
+    public function testSetsWithMutator()
+    {
+        $dados = [
+            'first_name' => 'João',
+            'last_name'  => 'da Silva',
+            'address'    => [
+                'city'  => 'Brusque',
+                'state' => 'SC',
+            ],
+        ];
+
+        $entity = new Seller($dados);
+
+        $this->assertTrue(is_subclass_of($entity->address, AbstractEntity::class));
+    }
+
     public function testTransformsToArray()
     {
         $dados = [
@@ -44,6 +60,24 @@ class EntityTest extends TestCase
 
         $this->assertIsArray($entityArray);
         $this->assertArrayHasKey('first_name', $entityArray);
+    }
+
+    public function testTransformNestedObjectToArray()
+    {
+        $dados = [
+            'first_name' => 'João',
+            'last_name'  => 'da Silva',
+            'address'    => [
+                'city'  => 'Brusque',
+                'state' => 'SC',
+            ],
+        ];
+
+        $entity      = new Seller($dados);
+        $entityArray = $entity->toArray();
+
+        $this->assertArrayHasKey('address', $entityArray);
+        $this->assertIsArray($entityArray['address']);
     }
 
     public function testMakeCollectionFunction()
