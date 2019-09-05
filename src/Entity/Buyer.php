@@ -3,6 +3,7 @@
 namespace DBerri\LaravelZoop\Entity;
 
 use DBerri\LaravelZoop\Entity\AbstractEntity;
+use DBerri\LaravelZoop\Entity\Address;
 
 class Buyer extends AbstractEntity
 {
@@ -158,4 +159,14 @@ class Buyer extends AbstractEntity
      * @var string
      */
     public $updated_at;
+
+    /**
+     * Instancia o objeto Address e coloca na propriedade desta classe
+     *
+     * @param array $address
+     */
+    public function setAddress($address)
+    {
+        $this->address = new Address($address);
+    }
 }
