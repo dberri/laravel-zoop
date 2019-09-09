@@ -14,6 +14,7 @@ class Transaction extends AbstractEntity
         'description',
         'payment_type',
         'on_behalf_of',
+        'customer',
     ];
 
     /**
@@ -130,5 +131,10 @@ class Transaction extends AbstractEntity
     public function setInstallmentPlan($plan)
     {
         $this->payment_method = new AbstractEntity($plan);
+    }
+
+    public function setAmount($amount)
+    {
+        $this->amount = (int) str_replace('.', '', ((float) $amount));
     }
 }
