@@ -16,7 +16,7 @@ class TransactionApi extends AbstractApi
     public function getAll($params = [])
     {
         $response = $this->adapter->get('/transactions', $params);
-        return Transaction::makeCollection($response['body']['items'])
+        return Transaction::makeCollection($response['body']['items']);
     }
 
     /**
@@ -49,8 +49,12 @@ class TransactionApi extends AbstractApi
      */
     public function update(Transaction $transaction)
     {
-        $url      = sprintf('/transactions/%s', $transaction->id);
-        $response = $this->adapter->put($url, $transaction->toArray());
+        $url    = sprintf('/transactions/%s', $transaction->id);
+        $params = [
+            "description" => $transaction->description,
+            "metadata"    => $transaction->metadata,
+        ];
+        $response = $this->adapter->put($url, $params);
         return new Transaction($response['body']);
     }
 
@@ -63,7 +67,7 @@ class TransactionApi extends AbstractApi
      */
     public function void($id, $on_behalf_of, $amount)
     {
-        $url      = sprintf('/transactions/%s/void', $transaction->id);
+        $url      = sprintf('/transactions/%s/void', $id);
         $response = $this->adapter->post($url, compact('on_behalf_of', 'amount'));
         return new Transaction($response['body']);
     }
@@ -143,6 +147,6 @@ class TransactionApi extends AbstractApi
     {
         $url      = sprintf('/transaction/%s/split_rules/%s', $transaction_id, $split_transaction_id);
         $response = $this->adapter->delete($url);
-        return $response['statusCode'] === 200;
+        return $response['body'];
     }
 }
