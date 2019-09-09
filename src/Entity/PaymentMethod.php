@@ -17,6 +17,56 @@ class PaymentMethod extends AbstractEntity
     public $payment_limit_date;
 
     /**
+     * @var string
+     */
+    public $description;
+
+    /**
+     * @var string
+     */
+    public $reference_number;
+
+    /**
+     * @var string
+     */
+    public $document_number;
+
+    /**
+     * @var string
+     */
+    public $sequence;
+
+    /**
+     * @var string
+     */
+    public $url;
+
+    /**
+     * @var boolean
+     */
+    public $accepted;
+
+    /**
+     * @var boolean
+     */
+    public $printed;
+
+    /**
+     * @var boolean
+     */
+    public $downloaded;
+
+    /**
+     * @var string
+     */
+    public $barcode;
+
+    /**
+     * @var string
+     */
+    public $status;
+
+    /**
      * @var array
      */
     public $body_instructions;

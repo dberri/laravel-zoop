@@ -119,7 +119,7 @@ class TransactionApi extends AbstractApi
      */
     public function createSplitTransaction($transaction_id, SplitTransaction $split_transaction)
     {
-        $url      = sprintf('/transaction/%s/split_rules', $transaction_id);
+        $url      = sprintf('/transactions/%s/split_rules', $transaction_id);
         $response = $this->adapter->post($url, $split_transaction->toArray());
         return new SplitTransaction($response['body']);
     }
@@ -132,7 +132,7 @@ class TransactionApi extends AbstractApi
      */
     public function updateSplitTransaction($transaction_id, SplitTransaction $split_transaction)
     {
-        $url      = sprintf('/transaction/%s/split_rules/%s', $transaction_id, $split_transaction->id);
+        $url      = sprintf('/transactions/%s/split_rules/%s', $transaction_id, $split_transaction->id);
         $response = $this->adapter->put($url, $split_transaction->toArray());
         return new SplitTransaction($response['body']);
     }
@@ -145,7 +145,7 @@ class TransactionApi extends AbstractApi
      */
     public function deleteSplitTransaction($transaction_id, $split_transaction_id)
     {
-        $url      = sprintf('/transaction/%s/split_rules/%s', $transaction_id, $split_transaction_id);
+        $url      = sprintf('/transactions/%s/split_rules/%s', $transaction_id, $split_transaction_id);
         $response = $this->adapter->delete($url);
         return $response['body'];
     }
