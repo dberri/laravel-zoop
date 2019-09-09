@@ -7,7 +7,7 @@ use DBerri\LaravelZoop\Entity\Address;
 use DBerri\LaravelZoop\Entity\Buyer;
 use Tests\TestCase;
 
-class EntityTest extends TestCase
+class BuyerApiTest extends TestCase
 {
     protected $api;
 

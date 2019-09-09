@@ -143,11 +143,10 @@ class EntityTest extends TestCase
             'neighborhood' => 'Bairro Teste',
             'city'         => 'Test City',
             'state'        => 'SC',
-            'postal_code'  => '88123321',
         ];
         $address = new Address($dados);
 
-        $this->assertContains('country_code', $address->makeValidation());
+        $this->assertContains('postal_code', $address->makeValidation());
         $this->assertFalse($address->validate());
     }
 
