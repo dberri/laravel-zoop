@@ -38,7 +38,7 @@ class BuyerApi extends AbstractApi
      */
     public function search($taxpayer_id = '', $ein = '')
     {
-        $response = $this->adapter->get('/selers/search', compact('taxpayer_id', 'ein'));
+        $response = $this->adapter->get('/buyers/search', compact('taxpayer_id', 'ein'));
         return new Buyer($response['body']);
     }
 
@@ -49,7 +49,7 @@ class BuyerApi extends AbstractApi
      */
     public function create(Buyer $buyer)
     {
-        $response = $this->adapter->post('/buyers/individuals', $buyer->toArray());
+        $response = $this->adapter->post('/buyers', $buyer->toArray());
         return new Buyer($response['body']);
     }
 
@@ -60,8 +60,8 @@ class BuyerApi extends AbstractApi
      */
     public function update(Buyer $buyer)
     {
-        $url      = '/buyers/individuals/' . $buyer->id;
-        $response = $this->adapter->put($url, $buyer);
+        $url      = '/buyers/' . $buyer->id;
+        $response = $this->adapter->put($url, $buyer->toArray());
         return new Buyer($response['body']);
     }
 
