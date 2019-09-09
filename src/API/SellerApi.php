@@ -100,7 +100,7 @@ class SellerApi extends AbstractApi
     {
         $url      = '/sellers/' . $id;
         $response = $this->adapter->delete($url);
-        return $response['statusCode'] === 200;
+        return $response['body'];
     }
 
     /**
@@ -156,7 +156,7 @@ class SellerApi extends AbstractApi
      *
      * @param string $id
      */
-    public function getTransactions($id, $params = [])
+    public function getBankAccounts($id, $params = [])
     {
         $url      = sprintf('/sellers/%s/bank_accounts', $id);
         $response = $this->adapter->get($url, $params);

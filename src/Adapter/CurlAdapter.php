@@ -54,7 +54,7 @@ class CurlAdapter implements AdapterInterface
         $opts[CURLOPT_SSL_VERIFYHOST] = 2;
         $opts[CURLOPT_SSL_VERIFYPEER] = false;
         $opts[CURLOPT_TIMEOUT]        = 80;
-        $opts[CURLOPT_URL]            = config('zoop.url') . ltrim($url, '/');
+        $opts[CURLOPT_URL]            = config('zoop.url') . config('zoop.marketplace_id') . $url;
         $opts[CURLOPT_USERPWD]        = config('zoop.publishable_key');
 
         if ($method === 'PUT' || $method === 'DELETE') {

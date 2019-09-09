@@ -112,6 +112,8 @@ class Seller extends AbstractEntity
     /**
      * @var object
      */
+    public $business_address;
+
     public $address;
 
     /**
@@ -121,7 +123,7 @@ class Seller extends AbstractEntity
      *
      * @var string
      */
-    public $defalt_debit;
+    public $default_debit;
 
     /**
      * O banco bancário padrão associado a um vendedor que será usado
@@ -169,6 +171,34 @@ class Seller extends AbstractEntity
      */
     public $updated_at;
 
+    public $status;
+
+    public $account_balance;
+
+    public $current_balance;
+
+    public $discal_responsibility;
+
+    public $owner;
+
+    public $business_name;
+
+    public $business_phone;
+
+    public $business_email;
+
+    public $business_website;
+
+    public $business_description;
+
+    public $business_facebook;
+
+    public $business_twitter;
+
+    public $business_opening_date;
+
+    public $delinquent;
+
     /**
      * Instancia o objeto Address e coloca na propriedade desta classe
      *
@@ -177,5 +207,15 @@ class Seller extends AbstractEntity
     public function setAddress($address)
     {
         $this->address = new Address($address);
+    }
+
+    public function setBusinessAddress($address)
+    {
+        $this->business_address = new Address($address);
+    }
+
+    public function setOwner($owner)
+    {
+        $this->owner = new AbstractEntity($owner);
     }
 }
