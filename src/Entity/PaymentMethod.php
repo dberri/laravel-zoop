@@ -84,6 +84,6 @@ class PaymentMethod extends AbstractEntity
      */
     public function setBillingInstructions($dados)
     {
-        $this->$billing_instructions = json_decode(json_encode($dados));
+        $this->billing_instructions = json_decode(json_encode($dados));
     }
 }
