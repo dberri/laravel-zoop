@@ -3,6 +3,7 @@
 namespace DBerri\LaravelZoop\Tests;
 
 use DBerri\LaravelZoop\API\SellerApi;
+use DBerri\LaravelZoop\Entity\Address;
 use DBerri\LaravelZoop\Entity\Seller;
 use Tests\TestCase;
 
@@ -54,5 +55,20 @@ class SellerApiTest extends TestCase
 
         $sellers = $this->api->getAll();
         $this->assertEquals(1, count($sellers));
+    }
+
+    public function testUpdateSellerAddress()
+    {
+        $seller          = $this->api->getById(config('zoop.seller_id'));
+        $seller->address = new Address([
+            'line1'        => 'Rua Rodrigues Alves',
+            'line2'        => '165',
+            'neighborhood' => 'Centro',
+            'city'         => 'Brusque',
+            'state'        => 'SC',
+            'postal_code'  => '88350-160',
+        ]);
+        $updatedSeller = $this->api->updateIndividual($seller);
+        $this->assertTrue(!is_null($seller->address->line1));
     }
 }
