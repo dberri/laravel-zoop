@@ -68,5 +68,5 @@ class Address extends AbstractEntity
      *
      * @var string
      */
-    public $country_code;
+    public $country_code = 'BR';
 }
