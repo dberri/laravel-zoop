@@ -7,6 +7,16 @@ use DBerri\LaravelZoop\Entity\AbstractEntity;
 class PaymentMethod extends AbstractEntity
 {
     /**
+     * @var string
+     */
+    public $id;
+
+    /**
+     * @var string
+     */
+    public $resource;
+
+    /**
      * @var string "YYYY-MM-DD"
      */
     public $expiration_date;

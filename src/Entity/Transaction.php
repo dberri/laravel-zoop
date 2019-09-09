@@ -130,7 +130,7 @@ class Transaction extends AbstractEntity
      */
     public function setInstallmentPlan($plan)
     {
-        $this->payment_method = new AbstractEntity($plan);
+        $this->installment_plan = new AbstractEntity($plan);
     }
 
     public function setAmount($amount)

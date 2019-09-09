@@ -6,6 +6,7 @@ use DBerri\LaravelZoop\Entity\AbstractEntity;
 use DBerri\LaravelZoop\Entity\Address;
 use DBerri\LaravelZoop\Entity\Buyer;
 use DBerri\LaravelZoop\Entity\Seller;
+use DBerri\LaravelZoop\Entity\Transaction;
 use Tests\TestCase;
 
 class EntityTest extends TestCase
@@ -175,5 +176,27 @@ class EntityTest extends TestCase
         ];
 
         $this->assertEmpty(array_diff($entity->makeValidation(), $testArray));
+    }
+
+    public function testBuildsNestedObject()
+    {
+        $dados = [
+            'id'             => "aa80e34c2e3c4c9b9ca67622f5a217b0",
+            "resource"       => "transaction",
+            "status"         => "pending",
+            "amount"         => "150.00",
+            'payment_method' => [
+                "id"               => "25f18f32ad824c35b19f1e85ff8dae70",
+                "resource"         => "boleto",
+                "description"      => "Geração de boleto teste",
+                "reference_number" => "1251553",
+                "document_number"  => "1251553",
+            ],
+        ];
+
+        $entity = new Transaction($dados);
+        \Log::info($entity->toArray());
+
+        $this->assertTrue(!is_null($entity->payment_method));
     }
 }
