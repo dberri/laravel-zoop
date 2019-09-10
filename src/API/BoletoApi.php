@@ -13,7 +13,7 @@ class BoletoApi extends AbstractApi
         return json_decode(json_encode($response['body']));
     }
 
-    public function sendToEmail()
+    public function sendToEmail($id)
     {
         $url      = sprintf('/boletos/%s/emails', $id);
         $response = $this->adapter->post($url);
