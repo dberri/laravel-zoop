@@ -174,4 +174,23 @@ class SellerApi extends AbstractApi
         $response = $this->adapter->get($url);
         return Transfer::makeCollection($response['body']['items']);
     }
+
+    /**
+     * Carrega documento para o vendedor
+     *
+     * @param string  $id        Identificador do vendedor
+     * @param array   $postData  Dados do $_POST
+     * @param string  $file      Result of $request->file('file')
+     */
+    public function createDocument($id, $postData, $file)
+    {
+        $url = sprintf('/sellers/%s/documents', $id);
+
+        $postData['file'] = '@' . realpath($file->getRealPath())
+        . ';filename=' . $file->getClientOriginalName()
+        . ';type=' . $file->getClientMimeType();
+        // $postData['file'] = 'data:' . $file->getClientMimeType() . ';name=' . $file->getClientOriginalName() . ';base64,' . base64_encode(file_get_contents($file->getPathName()));
+        $response = $this->adapter->post($url, $postData, ['Content-Type' => 'multipart/form-data']);
+        return [];
+    }
 }
