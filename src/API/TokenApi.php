@@ -3,8 +3,8 @@
 namespace DBerri\LaravelZoop\API;
 
 use DBerri\LaravelZoop\API\AbstractApi;
-use DBerri\LaravelZoop\API\Entity\BankAccount;
-use DBerri\LaravelZoop\API\Entity\Token;
+use DBerri\LaravelZoop\Entity\BankAccount;
+use DBerri\LaravelZoop\Entity\Token;
 
 class TokenApi extends AbstractApi
 {
