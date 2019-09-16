@@ -3,8 +3,8 @@
 namespace DBerri\LaravelZoop\API;
 
 use DBerri\LaravelZoop\API\AbstractApi;
-use DBerri\LaravelZoop\API\Entity\BankAccount;
-use DBerri\LaravelZoop\API\Entity\Transfer;
+use DBerri\LaravelZoop\Entity\BankAccount;
+use DBerri\LaravelZoop\Entity\Transfer;
 
 class BankAccountApi extends AbstractApi
 {
