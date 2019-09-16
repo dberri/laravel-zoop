@@ -74,7 +74,7 @@ class CurlAdapter implements AdapterInterface
         }
 
         curl_setopt_array($curl, $opts);
-        curl_setopt($curl, CURLOPT_VERBOSE, true);
+        // curl_setopt($curl, CURLOPT_VERBOSE, true);
         $response_body = curl_exec($curl);
         $response_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         curl_close($curl);
