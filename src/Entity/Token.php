@@ -19,6 +19,13 @@ class Token extends AbstractEntity
     public $id;
 
     /**
+     * O tipo do token
+     *
+     * @var string 'card'|'bankaccount'
+     */
+    public $type;
+
+    /**
      * Indica se o token foi ou não utilizado. tokens podem ser
      * utilizados apenas 1 vez. Valor padrão: true
      *
