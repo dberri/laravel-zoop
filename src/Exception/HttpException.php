@@ -2,6 +2,9 @@
 
 namespace DBerri\LaravelZoop\Exception;
 
+use DBerri\LaravelZoop\Exception\ConflictException;
+use DBerri\LaravelZoop\Exception\NotFoundException;
+
 class HttpException extends \Exception
 {
     /**
@@ -22,5 +25,18 @@ class HttpException extends \Exception
     {
         $this->code    = $code;
         $this->message = $body;
+
+        switch ($this->code) {
+            case '404':
+                throw new NotFoundException($this->code, $this->message);
+                break;
+
+            case '409':
+                throw new ConflictException($this->code, $this->message);
+                break;
+
+            default:
+                break;
+        }
     }
 }
