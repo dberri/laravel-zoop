@@ -13,7 +13,12 @@ class Zoop
 
     public function __construct()
     {
-        $this->config = config('zoop');
+        $this->config = [
+            'marketplace_id'  => getenv('ZOOP_MARKETPLACE_ID'),
+            'segim_seller_id' => getenv('ZOOP_SEGIM_SELLER_ID'),
+            'publishable_key' => getenv('ZOOP_PUBLISHABLE_KEY'),
+            'url'             => getenv('ZOOP_URL'),
+        ];
     }
 
     /**
@@ -40,8 +45,18 @@ class Zoop
      *
      * @return string
      */
+    public function getSegimSellerId()
+    {
+        return $this->config['segim_seller_id'];
+    }
+
+    /**
+     * Get endpoint URL
+     *
+     * @return string
+     */
     public function getUrl()
     {
-        return $this->config['endpoint'];
+        return $this->config['url'];
     }
 }

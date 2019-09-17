@@ -4,8 +4,9 @@ namespace DBerri\LaravelZoop\Adapter;
 
 use DBerri\LaravelZoop\Adapter\AdapterInterface;
 use DBerri\LaravelZoop\Exception\HttpException;
+use DBerri\LaravelZoop\Zoop;
 
-class CurlAdapter implements AdapterInterface
+class CurlAdapter extends Zoop implements AdapterInterface
 {
     public function get($url, $headers = [])
     {
@@ -58,8 +59,8 @@ class CurlAdapter implements AdapterInterface
         $opts[CURLOPT_SSL_VERIFYHOST] = 2;
         $opts[CURLOPT_SSL_VERIFYPEER] = false;
         $opts[CURLOPT_TIMEOUT]        = 80;
-        $opts[CURLOPT_URL]            = config('zoop.url') . config('zoop.marketplace_id') . $url;
-        $opts[CURLOPT_USERPWD]        = config('zoop.publishable_key');
+        $opts[CURLOPT_URL]            = $this->config['url'] . $this->config['marketplace_id'] . $url;
+        $opts[CURLOPT_USERPWD]        = $this->config['publishable_key'];
 
         if ($method === 'PUT' || $method === 'DELETE') {
             $opts[CURLOPT_CUSTOMREQUEST] = $method;
