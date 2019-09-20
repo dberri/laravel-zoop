@@ -6,10 +6,16 @@ use DBerri\LaravelZoop\Adapter\AdapterInterface;
 use DBerri\LaravelZoop\Exception\ConflictException;
 use DBerri\LaravelZoop\Exception\HttpException;
 use DBerri\LaravelZoop\Exception\NotFoundException;
-use DBerri\LaravelZoop\Zoop;
 
-class CurlAdapter extends Zoop implements AdapterInterface
+class CurlAdapter implements AdapterInterface
 {
+    protected $baseUrl;
+
+    public function __construct($baseUrl)
+    {
+        $this->baseUrl = $baseUrl;
+    }
+
     public function get($url, $headers = [])
     {
         return $this->request($url, 'GET', [], $headers);
@@ -61,8 +67,8 @@ class CurlAdapter extends Zoop implements AdapterInterface
         $opts[CURLOPT_SSL_VERIFYHOST] = 2;
         $opts[CURLOPT_SSL_VERIFYPEER] = false;
         $opts[CURLOPT_TIMEOUT]        = 80;
-        $opts[CURLOPT_URL]            = $this->config['url'] . $this->config['marketplace_id'] . $url;
-        $opts[CURLOPT_USERPWD]        = $this->config['publishable_key'];
+        $opts[CURLOPT_URL]            = $this->baseUrl . $url;
+        $opts[CURLOPT_USERPWD]        = getenv('ZOOP_PUBLISHABLE_KEY');
 
         if ($method === 'PUT' || $method === 'DELETE') {
             $opts[CURLOPT_CUSTOMREQUEST] = $method;

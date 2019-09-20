@@ -3,8 +3,9 @@
 namespace DBerri\LaravelZoop\API;
 
 use DBerri\LaravelZoop\Adapter\CurlAdapter;
+use DBerri\LaravelZoop\Zoop;
 
-abstract class AbstractApi
+abstract class AbstractApi extends Zoop
 {
     /**
      * Http Adapter Interface
@@ -20,6 +21,6 @@ abstract class AbstractApi
      */
     public function __construct()
     {
-        $this->adapter = new CurlAdapter();
+        $this->adapter = new CurlAdapter($this->getBaseUrl());
     }
 }

@@ -2,7 +2,7 @@
 
 namespace DBerri\LaravelZoop\Tests;
 
-use DBerri\LaravelZoop\API\TransferApi;
+use DBerri\LaravelZoop\API\P2PTransferApi;
 use Tests\TestCase;
 
 class TransferApiTest extends TestCase
@@ -12,7 +12,7 @@ class TransferApiTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->api = new TransferApi();
+        $this->api = new P2PTransferApi();
     }
 
     public function testTransferP2P()
@@ -23,6 +23,6 @@ class TransferApiTest extends TestCase
             'amount' => 100,
         ]);
 
-        $this->assertTrue(true);
+        $this->assertEquals('1.00', $transfer->amount);
     }
 }

@@ -52,18 +52,4 @@ class TransferApi extends AbstractApi
         $response = $this->adapter->get($url);
         return Transfer::makeCollection($response['body']['items']);
     }
-
-    /**
-     * Lista transações associadas a transferência
-     *
-     * @param string $owner    identificador do customer pagador
-     * @param string $receiver identificador do customer recebedor
-     * @param array  $params   array com `amount`, `description` e `transfer_date`
-     */
-    public function peer2peer($owner, $receiver, $params = [])
-    {
-        $url      = sprintf('/transfers/%s/to/%s', $owner, $receiver);
-        $response = $this->adapter->post($url, $params);
-        return $response['body'];
-    }
 }

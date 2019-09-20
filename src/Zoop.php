@@ -11,15 +11,12 @@ class Zoop
      */
     protected $config;
 
-    public function __construct()
-    {
-        $this->config = [
-            'marketplace_id'  => getenv('ZOOP_MARKETPLACE_ID'),
-            'segim_seller_id' => getenv('ZOOP_SEGIM_SELLER_ID'),
-            'publishable_key' => getenv('ZOOP_PUBLISHABLE_KEY'),
-            'url'             => getenv('ZOOP_URL'),
-        ];
-    }
+    /**
+     * Version of the API
+     *
+     * @var array
+     */
+    protected $apiVersion = 'v1';
 
     /**
      * Get Publishable Key
@@ -28,7 +25,7 @@ class Zoop
      */
     public function getPublishableKey()
     {
-        return $this->config['publishable_key'];
+        return getenv('ZOOP_PUBLISHABLE_KEY');
     }
     /**
      * Get Marketplace ID
@@ -37,7 +34,7 @@ class Zoop
      */
     public function getMarketplaceId()
     {
-        return $this->config['marketplace_id'];
+        return getenv('ZOOP_MARKETPLACE_ID');
     }
 
     /**
@@ -47,7 +44,12 @@ class Zoop
      */
     public function getSegimSellerId()
     {
-        return $this->config['segim_seller_id'];
+        return getenv('ZOOP_SELLER_ID');
+    }
+
+    public function getUrl()
+    {
+        return getenv('ZOOP_URL');
     }
 
     /**
@@ -55,8 +57,10 @@ class Zoop
      *
      * @return string
      */
-    public function getUrl()
+    public function getBaseUrl()
     {
-        return $this->config['url'];
+        $baseUrl       = $this->getUrl();
+        $marketplaceId = $this->getMarketplaceId();
+        return sprintf('%s%s/marketplaces/%s', $baseUrl, $this->apiVersion, $marketplaceId);
     }
 }
