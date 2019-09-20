@@ -17,6 +17,8 @@ class Transaction extends AbstractEntity
         'customer',
     ];
 
+    public $id;
+
     /**
      * Valor em centavos a ser cobrado pela transação
      *
