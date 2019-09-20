@@ -3,7 +3,9 @@
 namespace DBerri\LaravelZoop\Adapter;
 
 use DBerri\LaravelZoop\Adapter\AdapterInterface;
+use DBerri\LaravelZoop\Exception\ConflictException;
 use DBerri\LaravelZoop\Exception\HttpException;
+use DBerri\LaravelZoop\Exception\NotFoundException;
 use DBerri\LaravelZoop\Zoop;
 
 class CurlAdapter extends Zoop implements AdapterInterface
@@ -81,9 +83,27 @@ class CurlAdapter extends Zoop implements AdapterInterface
         curl_close($curl);
 
         if ($response_code >= 300) {
-            throw new HttpException($response_code, $response_body);
+            $this->throwError($response_body, $response_code);
         }
 
         return ['body' => json_decode($response_body, true), 'statusCode' => $response_code];
+    }
+
+    public function throwError($response_body, $response_code)
+    {
+        $error_message = json_decode($response_body)->error->message;
+        switch ($response_code) {
+            case 404:
+                throw new NotFoundException($error_message, $response_code);
+                break;
+
+            case 409:
+                throw new ConflictException($error_message, $response_code);
+                break;
+
+            default:
+                throw new HttpException($error_message, $response_code);
+                break;
+        }
     }
 }

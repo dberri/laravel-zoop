@@ -100,6 +100,11 @@ class Transaction extends AbstractEntity
     public $metadata;
 
     /**
+     * @var string (Y-m-dTH:i:s+z)
+     */
+    public $expected_on;
+
+    /**
      * $method é um array com:
      *   expiration_date  string    Data de vencimento do boleto
      *   top_instructions [string]  Instruções para o comprador utilizado nas vendas por boleto

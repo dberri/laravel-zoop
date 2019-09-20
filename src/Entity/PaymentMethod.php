@@ -79,7 +79,7 @@ class PaymentMethod extends AbstractEntity
     /**
      * @var array
      */
-    public $body_instructions;
+    public $top_instructions;
 
     /**
      * @var array
@@ -95,5 +95,10 @@ class PaymentMethod extends AbstractEntity
     public function setBillingInstructions($dados)
     {
         $this->billing_instructions = json_decode(json_encode($dados));
+    }
+
+    public function setTopInstructions($dados)
+    {
+        $this->top_instructions = json_decode(json_encode($dados));
     }
 }
