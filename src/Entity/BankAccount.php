@@ -9,6 +9,11 @@ class BankAccount extends AbstractEntity
     /**
      * @var string
      */
+    public $id;
+
+    /**
+     * @var string
+     */
     public $resource = 'bank_account';
 
     /**

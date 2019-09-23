@@ -7,6 +7,11 @@ use DBerri\LaravelZoop\Entity\AbstractEntity;
 class Source extends AbstractEntity
 {
     /**
+     * @var string
+     */
+    public $id;
+
+    /**
      * @var string (reusable, single_use)
      */
     public $usage;

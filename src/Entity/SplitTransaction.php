@@ -11,6 +11,11 @@ class SplitTransaction extends AbstractEntity
     ];
 
     /**
+     * @var string
+     */
+    public $id;
+
+    /**
      * id do vendedor recebedor
      *
      * @var string
