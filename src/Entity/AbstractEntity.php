@@ -76,7 +76,7 @@ class AbstractEntity
 
     private function isValid($property)
     {
-        return !is_null($this->$property);
+        return !is_null($this->$property) && $this->$property !== '';
     }
 
     public function makeValidation()
