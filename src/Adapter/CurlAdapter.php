@@ -6,6 +6,7 @@ use DBerri\LaravelZoop\Adapter\AdapterInterface;
 use DBerri\LaravelZoop\Exception\ConflictException;
 use DBerri\LaravelZoop\Exception\HttpException;
 use DBerri\LaravelZoop\Exception\NotFoundException;
+use DBerri\LaravelZoop\Exception\ValidationException;
 
 class CurlAdapter implements AdapterInterface
 {
@@ -105,6 +106,10 @@ class CurlAdapter implements AdapterInterface
 
             case 409:
                 throw new ConflictException($error_message, $response_code);
+                break;
+
+            case 422:
+                throw new ValidationException($error_message, $response_code, json_decode($response_body)->error->reasons);
                 break;
 
             default:
